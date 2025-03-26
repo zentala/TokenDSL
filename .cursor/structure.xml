@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <name>TokenDSL</name>
+    <version>1.0.0</version>
+    
+    <!-- Root Structure -->
+    <directory name="src">
+        <!-- Core DSL System -->
+        <directory name="core">
+            <file name="index.ts">Main entry point for DSL system</file>
+            <file name="types.ts">Core type definitions</file>
+            <file name="errors.ts">Error definitions</file>
+            
+            <!-- Parser -->
+            <directory name="parser">
+                <file name="index.ts">Parser entry point</file>
+                <file name="lexer.ts">DSL lexer implementation</file>
+                <file name="ast.ts">Abstract Syntax Tree definitions</file>
+                <file name="visitor.ts">AST visitor pattern implementation</file>
+            </directory>
+            
+            <!-- Validator -->
+            <directory name="validator">
+                <file name="index.ts">Validator entry point</file>
+                <file name="type-checker.ts">Type checking implementation</file>
+                <file name="dependency-checker.ts">Dependency validation</file>
+                <file name="schema-validator.ts">Schema validation</file>
+            </directory>
+            
+            <!-- Generator -->
+            <directory name="generator">
+                <file name="index.ts">Generator entry point</file>
+                <file name="typescript.ts">TypeScript code generation</file>
+                <file name="ui.ts">UI code generation</file>
+                <file name="docs.ts">Documentation generation</file>
+            </directory>
+            
+            <!-- Runtime -->
+            <directory name="runtime">
+                <file name="index.ts">Runtime entry point</file>
+                <file name="context.ts">Runtime context</file>
+                <file name="executor.ts">DSL execution</file>
+                <file name="metrics.ts">Runtime metrics</file>
+            </directory>
+        </directory>
+        
+        <!-- Modules -->
+        <directory name="modules">
+            <!-- Users Module -->
+            <directory name="users">
+                <file name="index.dsl.ts">Users module DSL definition</file>
+                <file name="api.ts">API endpoints</file>
+                <file name="schemas.ts">Data schemas</file>
+                <directory name="handlers">
+                    <file name="create.ts">Create user handler</file>
+                    <file name="get.ts">Get user handler</file>
+                    <file name="update.ts">Update user handler</file>
+                    <file name="delete.ts">Delete user handler</file>
+                </directory>
+                <directory name="storage">
+                    <file name="memory.ts">In-memory storage</file>
+                    <file name="database.ts">Database storage</file>
+                </directory>
+                <directory name="ui">
+                    <file name="forms.ts">User forms</file>
+                    <file name="pages.ts">User pages</file>
+                </directory>
+                <directory name="tests">
+                    <file name="data.ts">Test data</file>
+                    <file name="unit.ts">Unit tests</file>
+                    <file name="integration.ts">Integration tests</file>
+                </directory>
+            </directory>
+            
+            <!-- Posts Module -->
+            <directory name="posts">
+                <file name="index.dsl.ts">Posts module DSL definition</file>
+                <file name="api.ts">API endpoints</file>
+                <file name="schemas.ts">Data schemas</file>
+                <directory name="handlers">
+                    <file name="create.ts">Create post handler</file>
+                    <file name="get.ts">Get post handler</file>
+                    <file name="update.ts">Update post handler</file>
+                    <file name="delete.ts">Delete post handler</file>
+                </directory>
+                <directory name="storage">
+                    <file name="memory.ts">In-memory storage</file>
+                    <file name="database.ts">Database storage</file>
+                </directory>
+                <directory name="ui">
+                    <file name="forms.ts">Post forms</file>
+                    <file name="pages.ts">Post pages</file>
+                </directory>
+                <directory name="tests">
+                    <file name="data.ts">Test data</file>
+                    <file name="unit.ts">Unit tests</file>
+                    <file name="integration.ts">Integration tests</file>
+                </directory>
+            </directory>
+            
+            <!-- Comments Module -->
+            <directory name="comments">
+                <file name="index.dsl.ts">Comments module DSL definition</file>
+                <file name="api.ts">API endpoints</file>
+                <file name="schemas.ts">Data schemas</file>
+                <directory name="handlers">
+                    <file name="create.ts">Create comment handler</file>
+                    <file name="get.ts">Get comment handler</file>
+                    <file name="update.ts">Update comment handler</file>
+                    <file name="delete.ts">Delete comment handler</file>
+                </directory>
+                <directory name="storage">
+                    <file name="memory.ts">In-memory storage</file>
+                    <file name="database.ts">Database storage</file>
+                </directory>
+                <directory name="ui">
+                    <file name="forms.ts">Comment forms</file>
+                    <file name="pages.ts">Comment pages</file>
+                </directory>
+                <directory name="tests">
+                    <file name="data.ts">Test data</file>
+                    <file name="unit.ts">Unit tests</file>
+                    <file name="integration.ts">Integration tests</file>
+                </directory>
+            </directory>
+        </directory>
+        
+        <!-- Shared Components -->
+        <directory name="shared">
+            <directory name="types">
+                <file name="index.ts">Shared type definitions</file>
+            </directory>
+            <directory name="utils">
+                <file name="index.ts">Shared utilities</file>
+            </directory>
+            <directory name="constants">
+                <file name="index.ts">Shared constants</file>
+            </directory>
+        </directory>
+        
+        <!-- Documentation -->
+        <directory name="docs">
+            <file name="api.md">API documentation</file>
+            <file name="dsl.md">DSL documentation</file>
+            <file name="ui.md">UI documentation</file>
+            <file name="examples.md">Usage examples</file>
+        </directory>
+    </directory>
+    
+    <!-- Root Configuration Files -->
+    <file name="package.json">Project dependencies and scripts</file>
+    <file name="tsconfig.json">TypeScript configuration</file>
+    <file name="jest.config.js">Jest test configuration</file>
+    <file name="README.md">Project documentation</file>
+    
+    <!-- Development Tools -->
+    <directory name=".cursor">
+        <file name="FEAT.md">Features and requirements</file>
+        <file name="VISION.01.INTRO.md">Project vision</file>
+        <file name="VISION.02.USERS.md">Users module vision</file>
+        <file name="VISION.03.DSL.SERVER.md">DSL server vision</file>
+        <file name="structure.xml">This file structure</file>
+    </directory>
+</project> 
