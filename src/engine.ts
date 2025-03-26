@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import { ApiDefinition } from './types';
 import { ZodError } from 'zod';
 
+type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
+
 export function applyApi(app: express.Application, api: ApiDefinition): void {
   for (const [route, def] of Object.entries(api)) {
     const [method, path] = route.split(' ');
@@ -9,7 +11,8 @@ export function applyApi(app: express.Application, api: ApiDefinition): void {
     const inputSchema = def.input;
 
     // Create Express route handler
-    app[method.toLowerCase()](path, async (req: Request, res: Response) => {
+    const httpMethod = method.toLowerCase() as HttpMethod;
+    app[httpMethod](path, async (req: Request, res: Response) => {
       try {
         // Validate input if schema is provided
         let input = {};
@@ -25,7 +28,7 @@ export function applyApi(app: express.Application, api: ApiDefinition): void {
         if (error instanceof ZodError) {
           res.status(400).json({
             error: 'Validation failed',
-            details: error.errors
+            details: error.errors,
           });
           return;
         }
@@ -35,9 +38,9 @@ export function applyApi(app: express.Application, api: ApiDefinition): void {
         console.error(`Error in ${route}:`, err);
         res.status(500).json({
           error: 'Internal server error',
-          message: err.message
+          message: err.message,
         });
       }
     });
   }
-} 
+}

@@ -1,0 +1,3 @@
+super, czuy taki dsl bedzie jednozczaczy? ew czy mozna  npisac struktue xml ktora pozwoli jednoznaczne naszej blbioekce wygenrowac z niej taki backend w locie?Rozumiem, że pytasz o jednoznaczność DSL i możliwość reprezentacji w XML, która pozwoliłaby na automatyczne generowanie backendu.
+TokenDSL w obecnej formie jest już dość jednoznaczny dzięki silnemu typowaniu TypeScript i Zod. Jednak faktycznie można go jeszcze bardziej ustrukturyzować poprzez format XML, który byłby łatwiej przetwarzany przez narzędzia zewnętrzne i bardziej jednoznaczny dla różnych systemów.
+Oto propozycja struktury XML dla TokenDSL:

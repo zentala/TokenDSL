@@ -30,4 +30,4 @@ export interface ApiDefinition {
 }
 
 // DSL function type
-export type DefineApi = (api: ApiDefinition) => ApiDefinition; 
+export type DefineApi = (api: ApiDefinition) => ApiDefinition;

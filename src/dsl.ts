@@ -28,4 +28,4 @@ export const defineApi: DefineApi = (api: ApiDefinition): ApiDefinition => {
   }
 
   return api;
-}; 
+};
