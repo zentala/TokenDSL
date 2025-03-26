@@ -5,6 +5,61 @@
     
     <!-- Root Structure -->
     <directory name="src">
+        <!-- Layers -->
+        <directory name="layers">
+            <directory name="presentation">
+                <file name="index.ts">Presentation layer entry point</file>
+                <file name="controllers.ts">API controllers</file>
+                <file name="middleware.ts">HTTP middleware</file>
+                <file name="validation.ts">Request validation</file>
+                <directory name="__tests__">
+                    <file name="controllers.test.ts">Controller tests</file>
+                    <file name="middleware.test.ts">Middleware tests</file>
+                    <file name="validation.test.ts">Validation tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
+            </directory>
+            
+            <directory name="application">
+                <file name="index.ts">Application layer entry point</file>
+                <file name="use-cases.ts">Business use cases</file>
+                <file name="services.ts">Application services</file>
+                <file name="dto.ts">Data transfer objects</file>
+                <directory name="__tests__">
+                    <file name="use-cases.test.ts">Use case tests</file>
+                    <file name="services.test.ts">Service tests</file>
+                    <file name="dto.test.ts">DTO tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
+            </directory>
+            
+            <directory name="domain">
+                <file name="index.ts">Domain layer entry point</file>
+                <file name="entities.ts">Domain entities</file>
+                <file name="value-objects.ts">Value objects</file>
+                <file name="aggregates.ts">Aggregates</file>
+                <directory name="__tests__">
+                    <file name="entities.test.ts">Entity tests</file>
+                    <file name="value-objects.test.ts">Value object tests</file>
+                    <file name="aggregates.test.ts">Aggregate tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
+            </directory>
+            
+            <directory name="infrastructure">
+                <file name="index.ts">Infrastructure layer entry point</file>
+                <file name="repositories.ts">Repository implementations</file>
+                <file name="persistence.ts">Persistence implementations</file>
+                <file name="external.ts">External service integrations</file>
+                <directory name="__tests__">
+                    <file name="repositories.test.ts">Repository tests</file>
+                    <file name="persistence.test.ts">Persistence tests</file>
+                    <file name="external.test.ts">External service tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
+            </directory>
+        </directory>
+
         <!-- Core DSL System -->
         <directory name="core">
             <file name="index.ts">Main entry point for DSL system</file>
@@ -19,6 +74,12 @@
                 <file name="ast.ts">Abstract Syntax Tree definitions</file>
                 <file name="visitor.ts">AST visitor pattern implementation</file>
                 <file name="errors.ts">Parser specific errors</file>
+                <directory name="__tests__">
+                    <file name="lexer.test.ts">Lexer tests</file>
+                    <file name="ast.test.ts">AST tests</file>
+                    <file name="visitor.test.ts">Visitor tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
             </directory>
             
             <!-- Validator -->
@@ -28,6 +89,12 @@
                 <file name="dependency-checker.ts">Dependency validation</file>
                 <file name="schema-validator.ts">Schema validation</file>
                 <file name="errors.ts">Validator specific errors</file>
+                <directory name="__tests__">
+                    <file name="type-checker.test.ts">Type checker tests</file>
+                    <file name="dependency-checker.test.ts">Dependency tests</file>
+                    <file name="schema-validator.test.ts">Schema tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
             </directory>
             
             <!-- Generator -->
@@ -37,6 +104,12 @@
                 <file name="ui.ts">UI code generation</file>
                 <file name="docs.ts">Documentation generation</file>
                 <file name="errors.ts">Generator specific errors</file>
+                <directory name="__tests__">
+                    <file name="typescript.test.ts">TypeScript generator tests</file>
+                    <file name="ui.test.ts">UI generator tests</file>
+                    <file name="docs.test.ts">Docs generator tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
+                </directory>
             </directory>
             
             <!-- Runtime -->
@@ -61,6 +134,78 @@
         <directory name="modules">
             <!-- Users Module -->
             <directory name="users">
+                <directory name="domain">
+                    <file name="user.entity.ts">User domain entity</file>
+                    <file name="user.repository.ts">User repository interface</file>
+                    <file name="user.service.ts">User domain service</file>
+                    <directory name="__tests__">
+                        <file name="user.entity.test.ts">User entity tests</file>
+                        <file name="user.repository.test.ts">Repository tests</file>
+                        <file name="user.service.test.ts">Service tests</file>
+                        <file name="fixtures.ts">Test fixtures</file>
+                    </directory>
+                </directory>
+                
+                <directory name="application">
+                    <directory name="commands">
+                        <file name="create-user.command.ts">Create user command</file>
+                        <file name="update-user.command.ts">Update user command</file>
+                        <file name="delete-user.command.ts">Delete user command</file>
+                    </directory>
+                    
+                    <directory name="queries">
+                        <file name="get-user.query.ts">Get user query</file>
+                        <file name="list-users.query.ts">List users query</file>
+                    </directory>
+                    
+                    <directory name="read-models">
+                        <file name="user.read-model.ts">User read model</file>
+                        <file name="user-list.read-model.ts">User list read model</file>
+                    </directory>
+                    
+                    <directory name="write-models">
+                        <file name="user.write-model.ts">User write model</file>
+                    </directory>
+                    <directory name="__tests__">
+                        <directory name="commands">
+                            <file name="create-user.test.ts">Create command tests</file>
+                            <file name="update-user.test.ts">Update command tests</file>
+                            <file name="delete-user.test.ts">Delete command tests</file>
+                        </directory>
+                        <directory name="queries">
+                            <file name="get-user.test.ts">Get query tests</file>
+                            <file name="list-users.test.ts">List query tests</file>
+                        </directory>
+                        <file name="fixtures.ts">Test fixtures</file>
+                    </directory>
+                </directory>
+                
+                <directory name="infrastructure">
+                    <file name="user.repository.impl.ts">User repository implementation</file>
+                    <file name="user.mapper.ts">User data mapper</file>
+                    <directory name="__tests__">
+                        <file name="repository.test.ts">Repository implementation tests</file>
+                        <file name="mapper.test.ts">Mapper tests</file>
+                        <file name="fixtures.ts">Test fixtures</file>
+                    </directory>
+                </directory>
+                
+                <directory name="events">
+                    <file name="user-created.event.ts">User created event</file>
+                    <file name="user-updated.event.ts">User updated event</file>
+                    <file name="user-deleted.event.ts">User deleted event</file>
+                    <file name="event-handlers.ts">Event handlers</file>
+                    <directory name="__tests__">
+                        <file name="event-handlers.test.ts">Event handler tests</file>
+                        <file name="fixtures.ts">Test fixtures</file>
+                    </directory>
+                </directory>
+                
+                <directory name="dependencies">
+                    <file name="index.ts">Module dependencies</file>
+                    <file name="interfaces.ts">Dependency interfaces</file>
+                </directory>
+                
                 <file name="index.dsl.ts">Users module DSL definition</file>
                 <file name="api.ts">API endpoints</file>
                 <file name="schemas.ts">Data schemas</file>
@@ -81,16 +226,60 @@
                     <file name="pages.ts">User pages</file>
                     <file name="components.ts">UI components</file>
                 </directory>
-                <directory name="tests">
-                    <file name="data.ts">Test data</file>
-                    <file name="unit.ts">Unit tests</file>
-                    <file name="integration.ts">Integration tests</file>
-                    <file name="e2e.ts">End-to-end tests</file>
+                <directory name="__tests__">
+                    <file name="integration.test.ts">Module integration tests</file>
+                    <file name="e2e.test.ts">End-to-end tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
                 </directory>
             </directory>
             
             <!-- Posts Module -->
             <directory name="posts">
+                <directory name="domain">
+                    <file name="post.entity.ts">Post domain entity</file>
+                    <file name="post.repository.ts">Post repository interface</file>
+                    <file name="post.service.ts">Post domain service</file>
+                </directory>
+                
+                <directory name="application">
+                    <directory name="commands">
+                        <file name="create-post.command.ts">Create post command</file>
+                        <file name="update-post.command.ts">Update post command</file>
+                        <file name="delete-post.command.ts">Delete post command</file>
+                    </directory>
+                    
+                    <directory name="queries">
+                        <file name="get-post.query.ts">Get post query</file>
+                        <file name="list-posts.query.ts">List posts query</file>
+                    </directory>
+                    
+                    <directory name="read-models">
+                        <file name="post.read-model.ts">Post read model</file>
+                        <file name="post-list.read-model.ts">Post list read model</file>
+                    </directory>
+                    
+                    <directory name="write-models">
+                        <file name="post.write-model.ts">Post write model</file>
+                    </directory>
+                </directory>
+                
+                <directory name="infrastructure">
+                    <file name="post.repository.impl.ts">Post repository implementation</file>
+                    <file name="post.mapper.ts">Post data mapper</file>
+                </directory>
+                
+                <directory name="events">
+                    <file name="post-created.event.ts">Post created event</file>
+                    <file name="post-updated.event.ts">Post updated event</file>
+                    <file name="post-deleted.event.ts">Post deleted event</file>
+                    <file name="event-handlers.ts">Event handlers</file>
+                </directory>
+                
+                <directory name="dependencies">
+                    <file name="index.ts">Module dependencies</file>
+                    <file name="interfaces.ts">Dependency interfaces</file>
+                </directory>
+                
                 <file name="index.dsl.ts">Posts module DSL definition</file>
                 <file name="api.ts">API endpoints</file>
                 <file name="schemas.ts">Data schemas</file>
@@ -111,16 +300,60 @@
                     <file name="pages.ts">Post pages</file>
                     <file name="components.ts">UI components</file>
                 </directory>
-                <directory name="tests">
-                    <file name="data.ts">Test data</file>
-                    <file name="unit.ts">Unit tests</file>
-                    <file name="integration.ts">Integration tests</file>
-                    <file name="e2e.ts">End-to-end tests</file>
+                <directory name="__tests__">
+                    <file name="integration.test.ts">Module integration tests</file>
+                    <file name="e2e.test.ts">End-to-end tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
                 </directory>
             </directory>
             
             <!-- Comments Module -->
             <directory name="comments">
+                <directory name="domain">
+                    <file name="comment.entity.ts">Comment domain entity</file>
+                    <file name="comment.repository.ts">Comment repository interface</file>
+                    <file name="comment.service.ts">Comment domain service</file>
+                </directory>
+                
+                <directory name="application">
+                    <directory name="commands">
+                        <file name="create-comment.command.ts">Create comment command</file>
+                        <file name="update-comment.command.ts">Update comment command</file>
+                        <file name="delete-comment.command.ts">Delete comment command</file>
+                    </directory>
+                    
+                    <directory name="queries">
+                        <file name="get-comment.query.ts">Get comment query</file>
+                        <file name="list-comments.query.ts">List comments query</file>
+                    </directory>
+                    
+                    <directory name="read-models">
+                        <file name="comment.read-model.ts">Comment read model</file>
+                        <file name="comment-list.read-model.ts">Comment list read model</file>
+                    </directory>
+                    
+                    <directory name="write-models">
+                        <file name="comment.write-model.ts">Comment write model</file>
+                    </directory>
+                </directory>
+                
+                <directory name="infrastructure">
+                    <file name="comment.repository.impl.ts">Comment repository implementation</file>
+                    <file name="comment.mapper.ts">Comment data mapper</file>
+                </directory>
+                
+                <directory name="events">
+                    <file name="comment-created.event.ts">Comment created event</file>
+                    <file name="comment-updated.event.ts">Comment updated event</file>
+                    <file name="comment-deleted.event.ts">Comment deleted event</file>
+                    <file name="event-handlers.ts">Event handlers</file>
+                </directory>
+                
+                <directory name="dependencies">
+                    <file name="index.ts">Module dependencies</file>
+                    <file name="interfaces.ts">Dependency interfaces</file>
+                </directory>
+                
                 <file name="index.dsl.ts">Comments module DSL definition</file>
                 <file name="api.ts">API endpoints</file>
                 <file name="schemas.ts">Data schemas</file>
@@ -140,12 +373,43 @@
                     <file name="pages.ts">Comment pages</file>
                     <file name="components.ts">UI components</file>
                 </directory>
-                <directory name="tests">
-                    <file name="data.ts">Test data</file>
-                    <file name="unit.ts">Unit tests</file>
-                    <file name="integration.ts">Integration tests</file>
-                    <file name="e2e.ts">End-to-end tests</file>
+                <directory name="__tests__">
+                    <file name="integration.test.ts">Module integration tests</file>
+                    <file name="e2e.test.ts">End-to-end tests</file>
+                    <file name="fixtures.ts">Test fixtures</file>
                 </directory>
+            </directory>
+        </directory>
+        
+        <!-- Event Sourcing -->
+        <directory name="events">
+            <file name="index.ts">Event sourcing entry point</file>
+            <file name="event-store.ts">Event store implementation</file>
+            <file name="event-bus.ts">Event bus implementation</file>
+            <file name="event-handler.ts">Event handler base class</file>
+            <file name="event-serializer.ts">Event serialization</file>
+            <directory name="__tests__">
+                <file name="event-store.test.ts">Event store tests</file>
+                <file name="event-bus.test.ts">Event bus tests</file>
+                <file name="event-handler.test.ts">Handler tests</file>
+                <file name="event-serializer.test.ts">Serializer tests</file>
+                <file name="fixtures.ts">Test fixtures</file>
+            </directory>
+        </directory>
+        
+        <!-- CQRS -->
+        <directory name="cqrs">
+            <file name="index.ts">CQRS entry point</file>
+            <file name="command-bus.ts">Command bus implementation</file>
+            <file name="query-bus.ts">Query bus implementation</file>
+            <file name="command-handler.ts">Command handler base class</file>
+            <file name="query-handler.ts">Query handler base class</file>
+            <directory name="__tests__">
+                <file name="command-bus.test.ts">Command bus tests</file>
+                <file name="query-bus.test.ts">Query bus tests</file>
+                <file name="command-handler.test.ts">Command handler tests</file>
+                <file name="query-handler.test.ts">Query handler tests</file>
+                <file name="fixtures.ts">Test fixtures</file>
             </directory>
         </directory>
         
@@ -204,5 +468,14 @@
         <directory name="structure">
             <file name="index.xml">This file structure</file>
         </directory>
+    </directory>
+    
+    <!-- Test Configuration -->
+    <directory name="test">
+        <file name="jest.config.js">Jest configuration</file>
+        <file name="setup.ts">Test setup</file>
+        <file name="teardown.ts">Test teardown</file>
+        <file name="helpers.ts">Test helpers</file>
+        <file name="mocks.ts">Global mocks</file>
     </directory>
 </project> 
