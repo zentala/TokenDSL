@@ -14,7 +14,7 @@ mkdir -p src/{layers/{presentation,application,domain,infrastructure}/__tests__,
 touch package.json tsconfig.json jest.config.js README.md docker-compose.yml .env.example
 
 # Create .cursor directory structure
-mkdir -p .cursor/{team,structure}
+mkdir -p .cursor/team
 touch .cursor/{FEAT.md,VISION.01.INTRO.md,VISION.02.USERS.md,VISION.03.DSL.SERVER.md}
 touch .cursor/structure/index.xml
 
@@ -38,12 +38,10 @@ done
 # Create module files
 for module in users posts comments; do
     # Domain
-    mkdir -p src/modules/$module/domain/__tests__
     touch src/modules/$module/domain/{${module}.entity.ts,${module}.repository.ts,${module}.service.ts}
     touch src/modules/$module/domain/__tests__/{${module}.entity.test.ts,${module}.repository.test.ts,${module}.service.test.ts,fixtures.ts}
     
     # Application
-    mkdir -p src/modules/$module/application/{commands,queries,read-models,write-models,__tests__/{commands,queries}}
     touch src/modules/$module/application/commands/{create-${module}.command.ts,update-${module}.command.ts,delete-${module}.command.ts}
     touch src/modules/$module/application/queries/{get-${module}.query.ts,list-${module}s.query.ts}
     touch src/modules/$module/application/read-models/{${module}.read-model.ts,${module}-list.read-model.ts}
@@ -53,12 +51,10 @@ for module in users posts comments; do
     touch src/modules/$module/application/__tests__/fixtures.ts
     
     # Infrastructure
-    mkdir -p src/modules/$module/infrastructure/__tests__
     touch src/modules/$module/infrastructure/{${module}.repository.impl.ts,${module}.mapper.ts}
     touch src/modules/$module/infrastructure/__tests__/{repository.test.ts,mapper.test.ts,fixtures.ts}
     
     # Events
-    mkdir -p src/modules/$module/events/__tests__
     touch src/modules/$module/events/{${module}-created.event.ts,${module}-updated.event.ts,${module}-deleted.event.ts,event-handlers.ts}
     touch src/modules/$module/events/__tests__/{event-handlers.test.ts,fixtures.ts}
     
@@ -78,17 +74,14 @@ for module in users posts comments; do
     touch src/modules/$module/ui/{forms.ts,pages.ts,components.ts}
     
     # Module tests
-    mkdir -p src/modules/$module/__tests__
     touch src/modules/$module/__tests__/{integration.test.ts,e2e.test.ts,fixtures.ts}
 done
 
 # Create events files
-mkdir -p src/events/__tests__
 touch src/events/{index.ts,event-store.ts,event-bus.ts,event-handler.ts,event-serializer.ts}
 touch src/events/__tests__/{event-store.test.ts,event-bus.test.ts,event-handler.test.ts,event-serializer.test.ts,fixtures.ts}
 
 # Create CQRS files
-mkdir -p src/cqrs/__tests__
 touch src/cqrs/{index.ts,command-bus.ts,query-bus.ts,command-handler.ts,query-handler.ts}
 touch src/cqrs/__tests__/{command-bus.test.ts,query-bus.test.ts,command-handler.test.ts,query-handler.test.ts,fixtures.ts}
 
