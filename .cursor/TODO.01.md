@@ -6,7 +6,7 @@
    - [x] Fix error handling types
 
 2. [ ] Add tests
-   - [ ] Unit tests for DSL validation
+   - [x] Unit tests for DSL validation
    - [ ] Integration tests for API endpoints
    - [ ] Test coverage for error handling
 
@@ -78,4 +78,10 @@
     - [x] Add code examples
     - [x] Add handler examples
     - [x] Add validation examples
-    - [x] Add Swagger integration 
+    - [x] Add Swagger integration
+
+15. [x] Test setup
+    - [x] Configure Jest
+    - [x] Add test scripts
+    - [x] Configure coverage reporting
+    - [x] Add initial DSL validation tests 
