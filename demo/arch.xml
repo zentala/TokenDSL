@@ -12,6 +12,9 @@
                 <feature>Auto-completion</feature>
                 <feature>Live validation</feature>
                 <feature>Preview panel</feature>
+                <feature>Monaco editor integration</feature>
+                <feature>Error highlighting</feature>
+                <feature>Code formatting</feature>
             </features>
         </component>
 
@@ -22,6 +25,9 @@
                 <feature>Code snippets</feature>
                 <feature>Props documentation</feature>
                 <feature>Theme customization</feature>
+                <feature>Live editing</feature>
+                <feature>Component search</feature>
+                <feature>Category filtering</feature>
             </features>
         </component>
 
@@ -32,6 +38,9 @@
                 <feature>Validation rules</feature>
                 <feature>Relationships</feature>
                 <feature>Generate DSL</feature>
+                <feature>Schema preview</feature>
+                <feature>Type inference</feature>
+                <feature>Import/Export</feature>
             </features>
         </component>
 
@@ -42,6 +51,145 @@
                 <feature>Responsive design</feature>
                 <feature>Navigation sidebar</feature>
                 <feature>Theme switcher</feature>
+                <feature>Collapsible sections</feature>
+                <feature>Breadcrumbs</feature>
+                <feature>Quick actions</feature>
+            </features>
+        </component>
+
+        <!-- Basic UI Components -->
+        <component name="Button">
+            <description>Basic button component</description>
+            <features>
+                <feature>Multiple variants</feature>
+                <feature>Size options</feature>
+                <feature>Icon support</feature>
+                <feature>Loading state</feature>
+                <feature>Disabled state</feature>
+            </features>
+        </component>
+
+        <component name="Input">
+            <description>Form input component</description>
+            <features>
+                <feature>Multiple types</feature>
+                <feature>Validation states</feature>
+                <feature>Helper text</feature>
+                <feature>Prefix/Suffix</feature>
+                <feature>Auto-complete</feature>
+            </features>
+        </component>
+
+        <component name="Card">
+            <description>Container component</description>
+            <features>
+                <feature>Multiple variants</feature>
+                <feature>Header/Footer</feature>
+                <feature>Actions</feature>
+                <feature>Media support</feature>
+                <feature>Elevation control</feature>
+            </features>
+        </component>
+
+        <!-- Form Components -->
+        <component name="Form">
+            <description>Form container component</description>
+            <features>
+                <feature>Validation</feature>
+                <feature>Auto-save</feature>
+                <feature>Reset functionality</feature>
+                <feature>Error handling</feature>
+                <feature>Loading states</feature>
+            </features>
+        </component>
+
+        <component name="Select">
+            <description>Dropdown selection component</description>
+            <features>
+                <feature>Search functionality</feature>
+                <feature>Multiple selection</feature>
+                <feature>Clearable</feature>
+                <feature>Async options</feature>
+                <feature>Custom rendering</feature>
+            </features>
+        </component>
+
+        <component name="Checkbox">
+            <description>Checkbox component</description>
+            <features>
+                <feature>Indeterminate state</feature>
+                <feature>Group support</feature>
+                <feature>Custom styling</feature>
+                <feature>Label support</feature>
+            </features>
+        </component>
+
+        <!-- Layout Components -->
+        <component name="Grid">
+            <description>Grid layout component</description>
+            <features>
+                <feature>Responsive breakpoints</feature>
+                <feature>Gutter control</feature>
+                <feature>Alignment options</feature>
+                <feature>Auto-fit</feature>
+                <feature>Nested grids</feature>
+            </features>
+        </component>
+
+        <component name="Stack">
+            <description>Stack layout component</description>
+            <features>
+                <feature>Spacing control</feature>
+                <feature>Alignment options</feature>
+                <feature>Wrap support</feature>
+                <feature>Direction control</feature>
+                <feature>Divider support</feature>
+            </features>
+        </component>
+
+        <component name="Modal">
+            <description>Modal dialog component</description>
+            <features>
+                <feature>Backdrop control</feature>
+                <feature>Keyboard navigation</feature>
+                <feature>Animation options</feature>
+                <feature>Size variants</feature>
+                <feature>Scroll behavior</feature>
+            </features>
+        </component>
+
+        <!-- Data Components -->
+        <component name="Table">
+            <description>Data table component</description>
+            <features>
+                <feature>Sorting</feature>
+                <feature>Filtering</feature>
+                <feature>Pagination</feature>
+                <feature>Row selection</feature>
+                <feature>Column resizing</feature>
+                <feature>Custom cells</feature>
+            </features>
+        </component>
+
+        <component name="Chart">
+            <description>Data visualization component</description>
+            <features>
+                <feature>Multiple chart types</feature>
+                <feature>Interactive tooltips</feature>
+                <feature>Responsive sizing</feature>
+                <feature>Animation</feature>
+                <feature>Custom themes</feature>
+            </features>
+        </component>
+
+        <component name="Calendar">
+            <description>Calendar component</description>
+            <features>
+                <feature>Event support</feature>
+                <feature>Range selection</feature>
+                <feature>Multiple selection</feature>
+                <feature>Custom rendering</feature>
+                <feature>View options</feature>
             </features>
         </component>
 
@@ -51,6 +199,8 @@
             <components>
                 <component>DSLPlayground</component>
                 <component>ComponentGallery</component>
+                <component>FeatureGrid</component>
+                <component>Hero</component>
             </components>
         </page>
 
@@ -59,6 +209,8 @@
             <components>
                 <component>ComponentGallery</component>
                 <component>ModelBuilder</component>
+                <component>ComponentNav</component>
+                <component>CodeViewer</component>
             </components>
         </page>
 
@@ -67,6 +219,8 @@
             <components>
                 <component>DSLPlayground</component>
                 <component>ModelBuilder</component>
+                <component>PreviewPanel</component>
+                <component>ValidationPanel</component>
             </components>
         </page>
     </components>
@@ -79,6 +233,9 @@
                 <field name="features" type="string[]"/>
                 <field name="props" type="object"/>
                 <field name="examples" type="object[]"/>
+                <field name="category" type="string"/>
+                <field name="tags" type="string[]"/>
+                <field name="dependencies" type="string[]"/>
             </fields>
         </model>
 
@@ -89,6 +246,19 @@
                 <field name="code" type="string" required="true"/>
                 <field name="preview" type="object"/>
                 <field name="tags" type="string[]"/>
+                <field name="category" type="string"/>
+                <field name="difficulty" type="string"/>
+                <field name="relatedExamples" type="string[]"/>
+            </fields>
+        </model>
+
+        <model name="Theme">
+            <fields>
+                <field name="name" type="string" required="true"/>
+                <field name="colors" type="object"/>
+                <field name="typography" type="object"/>
+                <field name="spacing" type="object"/>
+                <field name="components" type="object"/>
             </fields>
         </model>
     </data-models>
@@ -106,6 +276,17 @@
         
         <endpoint path="/api/validate" method="POST">
             <description>Validate DSL code</description>
+            <request>string</request>
+            <response>object</response>
+        </endpoint>
+
+        <endpoint path="/api/themes" method="GET">
+            <description>Get available themes</description>
+            <response>Theme[]</response>
+        </endpoint>
+
+        <endpoint path="/api/preview" method="POST">
+            <description>Generate preview for DSL code</description>
             <request>string</request>
             <response>object</response>
         </endpoint>

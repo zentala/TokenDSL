@@ -1,0 +1,25 @@
+Oto plik `agents.xml`, który może być używany jako **prompt seed** albo zasób wspomagający agenta LLM do generowania kodu, commitów, UI, testów – w oparciu o TokenDSL:
+
+xml
+
+KopiujEdytuj
+
+`<!-- agents.xml --> <agents>   <instructions>     <goal>Minimize tokens, maximize clarity, and allow full code understanding via TokenDSL</goal>     <principles>       <principle>Use Zod schemas to define data structure and validation</principle>       <principle>Attach metadata like description, tags, commitHint, and uiSchema</principle>       <principle>Keep one source of truth per endpoint (no duplication)</principle>     </principles>   </instructions>    <example>     <endpoint method="POST" path="/users">       <description>Create a new user</description>       <tags>         <tag>users</tag>         <tag>create</tag>       </tags>       <commitHint>Add user creation endpoint</commitHint>       <input>         <field name="name" type="string" label="Full name"/>         <field name="email" type="string" format="email" label="Email address"/>       </input>       <uiSchema layout="form">         <field name="name" type="text" label="Full name" />         <field name="email" type="email" label="Email address" />       </uiSchema>       <exampleInput>         <name>Alice</name>         <email>alice@example.com</email>       </exampleInput>     </endpoint>   </example>    <llm-prompts>     <commitMessage>Generate a commit message using commitHint</commitMessage>     <ui>Generate MUI-based React form using uiSchema</ui>     <tests>Write unit tests for the handler using Zod input and exampleInput</tests>     <docs>Generate API docs using description, input schema, and tags</docs>   </llm-prompts>    <shared>     <types>All Zod schemas are exported for frontend via zod-to-ts</types>     <designTokens>Shared layout & UI config can be stored in config/theme.ts</designTokens>   </shared> </agents>`
+
+* * *
+
+### 📦 Co to daje agentowi?
+
+-   wie jak korzystać z DSL i gdzie szukać semantyki
+    
+-   wie jak wygenerować UI, testy, dokumentację, commity
+    
+-   może używać pliku XML jako feed lub prompt-seeda
+    
+
+Chcesz, żebym od razu dodał `agents.xml` do Twojego repo lub wrzucił go do `docs/agents.xml` jako część startera?
+
+
+
+
+
