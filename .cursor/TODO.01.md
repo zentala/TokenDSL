@@ -1,6 +1,6 @@
 # TODO List for TokenDSL
 
-## �� High Priority
+## 🔥 High Priority
 1. [x] Fix TypeScript errors in engine.ts
    - [x] Add proper type for Express method handlers
    - [x] Fix error handling types
@@ -10,10 +10,10 @@
    - [ ] Integration tests for API endpoints
    - [ ] Test coverage for error handling
 
-3. [ ] Add OpenAPI documentation generation
-   - [ ] Convert Zod schemas to OpenAPI specs
-   - [ ] Generate Swagger UI
-   - [ ] Add endpoint descriptions and examples
+3. [x] Add OpenAPI documentation generation
+   - [x] Convert Zod schemas to OpenAPI specs
+   - [x] Generate Swagger UI
+   - [x] Add endpoint descriptions and examples
 
 ## 🔧 Medium Priority
 4. [ ] Add authentication support
@@ -26,8 +26,8 @@
    - [ ] Scaffold API structure
    - [ ] Validate existing endpoints
 
-6. [ ] Add more examples
-   - [ ] CRUD operations
+6. [x] Add more examples
+   - [x] CRUD operations
    - [ ] File upload handling
    - [ ] WebSocket integration
 
@@ -42,10 +42,13 @@
    - [ ] Performance metrics
    - [ ] Error tracking
 
-9. [ ] Documentation improvements
-   - [ ] API usage guide
+9. [x] Documentation improvements
+   - [x] API usage guide
+   - [x] Basic examples
    - [ ] Best practices
    - [ ] Migration guide
+   - [ ] Error handling guide
+   - [ ] Testing guide
 
 ## 🔬 Experimental
 10. [ ] AI code generation
@@ -68,4 +71,11 @@
 13. [x] Core DSL implementation
     - [x] Define API types
     - [x] Implement DSL validation
-    - [x] Create example endpoints 
+    - [x] Create example endpoints
+
+14. [x] Documentation
+    - [x] Create HTML documentation
+    - [x] Add code examples
+    - [x] Add handler examples
+    - [x] Add validation examples
+    - [x] Add Swagger integration 
