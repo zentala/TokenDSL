@@ -1,18 +1,15 @@
 {
-  "name": "tokendsl",
+  "name": "token-dsl",
   "version": "1.0.0",
-  "description": "A simple DSL for creating APIs in TypeScript",
+  "description": "A domain-specific language for token-based authentication and authorization",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint \"src/**/*.ts\"",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build"
   },
   "keywords": [
     "api",
