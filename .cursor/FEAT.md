@@ -193,4 +193,94 @@ Każdy moduł musi zawierać:
 - [ ] Komponenty
 - [ ] Formularze
 - [ ] Stylowanie
-- [ ] Testy UI 
+- [ ] Testy UI
+
+## 🔄 Event Sourcing
+
+### 1. Event Store
+- [ ] Implementacja event store
+  - [ ] Zapisywanie eventów
+  - [ ] Odczyt eventów
+  - [ ] Replay eventów
+  - [ ] Testy event store
+
+### 2. Event Bus
+- [ ] Implementacja event bus
+  - [ ] Publikowanie eventów
+  - [ ] Subskrypcja eventów
+  - [ ] Routing eventów
+  - [ ] Testy event bus
+
+### 3. Event Handlers
+- [ ] Implementacja handlerów
+  - [ ] Base handler class
+  - [ ] Handler registration
+  - [ ] Error handling
+  - [ ] Testy handlerów
+
+### 4. Event Serialization
+- [ ] Implementacja serializacji
+  - [ ] Serializacja eventów
+  - [ ] Deserializacja eventów
+  - [ ] Versioning
+  - [ ] Testy serializacji
+
+## 📋 CQRS
+
+### 1. Command Bus
+- [ ] Implementacja command bus
+  - [ ] Wysyłanie komend
+  - [ ] Command validation
+  - [ ] Command routing
+  - [ ] Testy command bus
+
+### 2. Query Bus
+- [ ] Implementacja query bus
+  - [ ] Wysyłanie zapytań
+  - [ ] Query validation
+  - [ ] Query routing
+  - [ ] Testy query bus
+
+### 3. Command Handlers
+- [ ] Implementacja command handlerów
+  - [ ] Base command handler
+  - [ ] Handler registration
+  - [ ] Error handling
+  - [ ] Testy command handlerów
+
+### 4. Query Handlers
+- [ ] Implementacja query handlerów
+  - [ ] Base query handler
+  - [ ] Handler registration
+  - [ ] Error handling
+  - [ ] Testy query handlerów
+
+## 🏗️ Layered Architecture
+
+### 1. Presentation Layer
+- [ ] Implementacja kontrolerów
+  - [ ] API endpoints
+  - [ ] Request validation
+  - [ ] Response formatting
+  - [ ] Testy kontrolerów
+
+### 2. Application Layer
+- [ ] Implementacja use cases
+  - [ ] Business logic
+  - [ ] Transaction management
+  - [ ] Event publishing
+  - [ ] Testy use cases
+
+### 3. Domain Layer
+- [ ] Implementacja encji
+  - [ ] Domain entities
+  - [ ] Value objects
+  - [ ] Aggregates
+  - [ ] Testy encji
+
+### 4. Infrastructure Layer
+- [ ] Implementacja repozytoriów
+  - [ ] Repository interfaces
+  - [ ] Repository implementations
+  - [ ] Data mapping
+  - [ ] Testy repozytoriów 
