@@ -1,0 +1,51 @@
+flowchart TD
+    classDef dsl fill:#ebf8ff,stroke:#3182ce,color:#2c5282
+    classDef framework fill:#e6fffa,stroke:#319795,color:#234e52
+    classDef api fill:#edf2ff,stroke:#4c51bf,color:#3c366b
+    classDef client fill:#faf5ff,stroke:#805ad5,color:#44337a
+    classDef feature fill:#fefcbf,stroke:#d69e2e,color:#744210
+
+    title["TokenDSL: Token-Efficient Backend DSL"]
+
+    %% DSL Definitions
+    dsl["DSL Definitions"] --> service1["users-service-v1.0\nindex.dsl.ts"]
+    dsl --> service2["orders-service-v2.0\nindex.dsl.ts"]
+    dsl --> service3["payments-service-v1.5\nindex.dsl.ts"]
+
+    %% DSL Contents per service
+    service1 --> models1["Models\n- user.model.dsl.ts\n- role.model.dsl.ts"]
+    service1 --> endpoints1["Endpoints\n- users.endpoints.dsl.ts\n- auth.endpoints.dsl.ts"]
+    service1 --> i18n1["i18n\n- en.mo\n- pl.mo"]
+    service1 --> testdata1["Test Data\n- users.data.json\n- roles.data.json"]
+
+    %% Framework Layer
+    service1 & service2 & service3 --> loader["DSL Loader"]
+    loader --> validator["DSL Validator"]
+    validator --> generator["Code Generator"]
+    generator --> manager["Services Manager"]
+
+    %% Generated APIs
+    manager --> usersAPI["Users API\nExpress - Port 3001"]
+    manager --> ordersAPI["Orders API\nFastify - Port 3002"]
+    manager --> paymentsAPI["Payments API\nKoa - Port 3003"]
+
+    %% Frontend/Clients
+    usersAPI & ordersAPI & paymentsAPI --> react["React Application"]
+    usersAPI & ordersAPI & paymentsAPI --> swagger["API Documentation\nSwagger/OpenAPI"]
+    usersAPI & ordersAPI & paymentsAPI --> admin["Admin UI"]
+    usersAPI & ordersAPI & paymentsAPI --> types["TypeScript Types\nShared with Frontend"]
+
+    %% Features
+    features["Key Features"] --> versioningF["Versioning"]
+    features --> validationF["Validation"]
+    features --> i18nF["i18n Support"]
+    features --> testF["Test Data"]
+    features --> tokenF["Token Efficiency"]
+    features --> multiF["Multi-service"]
+
+    %% Styling
+    class dsl,service1,service2,service3,models1,endpoints1,i18n1,testdata1 dsl
+    class loader,validator,generator,manager framework
+    class usersAPI,ordersAPI,paymentsAPI api
+    class react,swagger,admin,types client
+    class features,versioningF,validationF,i18nF,testF,tokenF,multiF feature

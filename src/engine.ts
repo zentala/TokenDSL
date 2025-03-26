@@ -4,43 +4,58 @@ import { ZodError } from 'zod';
 
 type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
 
-export function applyApi(app: express.Application, api: ApiDefinition): void {
+interface ApiOptions {
+  onSuccess?: (req: Request, res: Response, result: any) => void;
+  onError?: (req: Request, res: Response, error: Error) => void;
+}
+
+export function applyApi(app: express.Application, api: ApiDefinition, options: ApiOptions = {}): void {
+  const { onSuccess, onError } = options;
+
   for (const [route, def] of Object.entries(api)) {
     const [method, path] = route.split(' ');
-    const handler = def.handler;
-    const inputSchema = def.input;
-
-    // Create Express route handler
-    const httpMethod = method.toLowerCase() as HttpMethod;
-    app[httpMethod](path, async (req: Request, res: Response) => {
+    const handler = async (req: Request, res: Response) => {
       try {
-        // Validate input if schema is provided
         let input = {};
-        if (inputSchema) {
-          input = inputSchema.parse(req.body);
+        
+        // Parse path parameters
+        const pathParams = path.match(/:(\w+)/g) || [];
+        for (const param of pathParams) {
+          const key = param.slice(1);
+          input = { ...input, [key]: req.params[key] };
         }
 
-        // Execute handler
-        const result = await handler(input, req);
-        res.json(result);
+        // Parse query parameters
+        input = { ...input, ...req.query };
+
+        // Parse body for POST/PUT
+        if (method === 'POST' || method === 'PUT') {
+          input = { ...input, ...req.body };
+        }
+
+        // Validate input if schema is provided
+        if (def.input) {
+          input = def.input.parse(input);
+        }
+
+        // Call handler
+        const result = await def.handler(input, req);
+
+        // Send response
+        if (onSuccess) {
+          onSuccess(req, res, result);
+        } else {
+          res.json(result);
+        }
       } catch (error) {
-        // Handle validation errors
-        if (error instanceof ZodError) {
-          res.status(400).json({
-            error: 'Validation failed',
-            details: error.errors,
-          });
-          return;
+        if (onError) {
+          onError(req, res, error as Error);
+        } else {
+          res.status(400).json({ error: (error as Error).message });
         }
-
-        // Handle other errors
-        const err = error as Error;
-        console.error(`Error in ${route}:`, err);
-        res.status(500).json({
-          error: 'Internal server error',
-          message: err.message,
-        });
       }
-    });
+    };
+
+    app[method.toLowerCase()](path, handler);
   }
 }

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokenDSL - Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-typescript.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8">TokenDSL - Documentation</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">What is TokenDSL?</h2>
+            <p class="text-gray-700 mb-4">
+                TokenDSL is a simple yet powerful way to create APIs in TypeScript. It allows you to quickly define endpoints
+                with built-in validation, documentation, and UI generation.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Quick Start</h2>
+            <div class="space-y-4">
+                <h3 class="text-xl font-medium">1. Installation</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-bash">npm install tokendsl</code></pre>
+
+                <h3 class="text-xl font-medium">2. Basic Example</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">import { defineApi } from 'tokendsl';
+import { z } from 'zod';
+
+// Define schema
+const UserSchema = z.object({
+  id: z.string().describe('User ID'),
+  name: z.string().describe('Full name'),
+  email: z.string().email().describe('Email')
+});
+
+// Define API
+const userApi = defineApi({
+  'GET /api/users': {
+    handler: async () => {
+      return [
+        { id: '1', name: 'John Doe', email: 'john@example.com' }
+      ];
+    },
+    description: 'Get all users',
+    tags: ['users'],
+    uiSchema: {
+      layout: 'table',
+      fields: {
+        id: { type: 'text', label: 'ID' },
+        name: { type: 'text', label: 'Name' },
+        email: { type: 'email', label: 'Email' }
+      }
+    }
+  }
+});</code></pre>
+
+                <h3 class="text-xl font-medium">3. Usage in Application</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">import express from 'express';
+import { applyApi } from 'tokendsl';
+import { userApi } from './api/users';
+
+const app = express();
+app.use(express.json());
+
+applyApi(app, userApi);
+
+app.listen(3000);</code></pre>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">API Definition Structure</h2>
+            <div class="space-y-4">
+                <h3 class="text-xl font-medium">Basic Template</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">const api = defineApi({
+  'METHOD /path': {
+    input: z.object({...}), // Input validation schema
+    handler: async (input, req) => {...}, // Handler function
+    description: 'Endpoint description',
+    tags: ['tag1', 'tag2'],
+    exampleInput: {...}, // Example input data
+    exampleOutput: {...}, // Example output data
+    uiSchema: {...} // UI schema
+  }
+});</code></pre>
+
+                <h3 class="text-xl font-medium">UI Schema</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">uiSchema: {
+  layout: 'form' | 'card' | 'table',
+  fields: {
+    fieldName: {
+      type: 'text' | 'email' | 'number',
+      label: 'Field label',
+      display: 'readonly' | 'editable'
+    }
+  }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Swagger Documentation</h2>
+            <p class="text-gray-700 mb-4">
+                Swagger documentation is automatically generated from JSDoc comments. Example:
+            </p>
+            <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get all users
+ *     description: Returns a list of users
+ *     responses:
+ *       200:
+ *         description: List of users
+ */
+'GET /api/users': {
+  handler: getAllUsers,
+  description: 'Get all users',
+  tags: ['users']
+}</code></pre>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4">Examples</h2>
+            <div class="space-y-4">
+                <h3 class="text-xl font-medium">CRUD API</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">const userApi = defineApi({
+  'GET /api/users': {
+    handler: getAllUsers,
+    description: 'Get all users',
+    tags: ['users']
+  },
+  'GET /api/users/:id': {
+    input: z.object({ id: z.string() }),
+    handler: getUserById,
+    description: 'Get user by ID',
+    tags: ['users']
+  },
+  'POST /api/users': {
+    input: CreateUserSchema,
+    handler: createUser,
+    description: 'Create user',
+    tags: ['users']
+  },
+  'PUT /api/users/:id': {
+    input: UpdateUserSchema,
+    handler: updateUser,
+    description: 'Update user',
+    tags: ['users']
+  },
+  'DELETE /api/users/:id': {
+    input: z.object({ id: z.string() }),
+    handler: deleteUser,
+    description: 'Delete user',
+    tags: ['users']
+  }
+});</code></pre>
+
+                <h3 class="text-xl font-medium">Handler Implementation</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">// In-memory storage
+const users = new Map<string, User>();
+
+// Handlers
+const getAllUsers = async () => {
+  return Array.from(users.values());
+};
+
+const getUserById = async (input: { id: string }) => {
+  const user = users.get(input.id);
+  if (!user) throw new Error('User not found');
+  return user;
+};
+
+const createUser = async (input: CreateUserInput) => {
+  const id = crypto.randomUUID();
+  const user = { id, ...input };
+  users.set(id, user);
+  return user;
+};
+
+const updateUser = async (input: UpdateUserInput) => {
+  const user = users.get(input.id);
+  if (!user) throw new Error('User not found');
+  const updated = { ...user, ...input };
+  users.set(input.id, updated);
+  return updated;
+};
+
+const deleteUser = async (input: { id: string }) => {
+  if (!users.has(input.id)) throw new Error('User not found');
+  users.delete(input.id);
+  return { success: true };
+};</code></pre>
+
+                <h3 class="text-xl font-medium">Validation Schemas</h3>
+                <pre class="bg-gray-800 rounded p-4"><code class="language-typescript">const CreateUserSchema = z.object({
+  name: z.string().min(2).max(100),
+  email: z.string().email(),
+  age: z.number().min(0).max(150).optional()
+});
+
+const UpdateUserSchema = z.object({
+  id: z.string(),
+  name: z.string().min(2).max(100).optional(),
+  email: z.string().email().optional(),
+  age: z.number().min(0).max(150).optional()
+});</code></pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
