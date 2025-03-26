@@ -1,0 +1,133 @@
+graph TB
+    subgraph "TokenDSL Architecture"
+        DSL[DSL Layer<br/>.dsl.ts files]
+        PROC[Processing Layer<br/>loader/validator/generator]
+        API[API Deployment Layer<br/>generated servers]
+        CLIENT[Client Layer<br/>frontend/docs]
+
+        DSL --> PROC
+        PROC --> API
+        PROC --> CLIENT
+    end
+
+    subgraph "Project Structure"
+        ROOT[project-root]
+        DSL_DIR[dsl/]
+        SRC[src/]
+        CONFIG[config/]
+        DIST[dist/]
+
+        ROOT --> DSL_DIR
+        ROOT --> SRC
+        ROOT --> CONFIG
+        ROOT --> DIST
+
+        subgraph "Service Structure"
+            SERVICE[users-service-v1.0/]
+            INDEX[index.dsl.ts]
+            MODELS[models/]
+            ENDPOINTS[endpoints/]
+            I18N[i18n/]
+            TEST_DATA[test-data/]
+            CONFIG_DSL[service.config.dsl.ts]
+            COMMON[common/]
+
+            DSL_DIR --> SERVICE
+            SERVICE --> INDEX
+            SERVICE --> MODELS
+            SERVICE --> ENDPOINTS
+            SERVICE --> I18N
+            SERVICE --> TEST_DATA
+            SERVICE --> CONFIG_DSL
+            DSL_DIR --> COMMON
+        end
+    end
+
+    subgraph "Key Features"
+        VERSION[API Versioning]
+        I18N_FEAT[Internationalization]
+        TEST_DATA_FEAT[Test Data]
+        VALIDATION[Validation]
+        PLATFORM[Platform Support]
+        UI_GEN[UI Generation]
+
+        VERSION --> PROC
+        I18N_FEAT --> PROC
+        TEST_DATA_FEAT --> PROC
+        VALIDATION --> PROC
+        PLATFORM --> PROC
+        UI_GEN --> PROC
+    end
+
+    subgraph "Frontend Components"
+        BASIC[Basic UI Components]
+        FORM[Form Components]
+        LAYOUT[Layout Components]
+        DATA[Data Components]
+        THEMES[Themes]
+
+        BASIC --> CLIENT
+        FORM --> CLIENT
+        LAYOUT --> CLIENT
+        DATA --> CLIENT
+        THEMES --> CLIENT
+    end
+
+    subgraph "Development Tools"
+        CLI[CLI Tools]
+        VSCODE[VS Code Plugin]
+        DEBUG[Debugging Tools]
+
+        CLI --> PROC
+        VSCODE --> PROC
+        DEBUG --> PROC
+    end
+
+    subgraph "Testing"
+        UNIT[Unit Tests]
+        INTEGRATION[Integration Tests]
+        E2E[E2E Tests]
+
+        UNIT --> PROC
+        INTEGRATION --> PROC
+        E2E --> PROC
+    end
+
+    subgraph "Development Phases"
+        PHASE1[Phase 1: Basics]
+        PHASE2[Phase 2: Frontend]
+        PHASE3[Phase 3: Tools]
+        PHASE4[Phase 4: Extensions]
+
+        PHASE1 --> PHASE2
+        PHASE2 --> PHASE3
+        PHASE3 --> PHASE4
+    end
+
+    subgraph "Stack"
+        TS[TypeScript]
+        ZOD[Zod]
+        API_DEF[API Definition]
+        ROUTING[Express/Fastify]
+        ORM[Prisma]
+        TYPE_SHARING[Type Sharing]
+        UI_SCHEMA[UI Schema]
+
+        TS --> DSL
+        ZOD --> DSL
+        API_DEF --> DSL
+        ROUTING --> API
+        ORM --> API
+        TYPE_SHARING --> CLIENT
+        UI_SCHEMA --> CLIENT
+    end
+
+    style DSL fill:#f9f,stroke:#333,stroke-width:2px
+    style PROC fill:#bbf,stroke:#333,stroke-width:2px
+    style API fill:#bfb,stroke:#333,stroke-width:2px
+    style CLIENT fill:#fbb,stroke:#333,stroke-width:2px
+    style SERVICE fill:#fbf,stroke:#333,stroke-width:2px
+    style PHASE1 fill:#fbb,stroke:#333,stroke-width:2px
+    style PHASE2 fill:#fbb,stroke:#333,stroke-width:2px
+    style PHASE3 fill:#fbb,stroke:#333,stroke-width:2px
+    style PHASE4 fill:#fbb,stroke:#333,stroke-width:2px 
