@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<architecture>
+    <name>TokenDSL Interactive Demo</name>
+    <version>1.0.0</version>
+    
+    <components>
+        <!-- Core Components -->
+        <component name="DSLPlayground">
+            <description>Interactive DSL editor with live preview</description>
+            <features>
+                <feature>Syntax highlighting</feature>
+                <feature>Auto-completion</feature>
+                <feature>Live validation</feature>
+                <feature>Preview panel</feature>
+            </features>
+        </component>
+
+        <component name="ComponentGallery">
+            <description>Showcase of all available UI components</description>
+            <features>
+                <feature>Interactive examples</feature>
+                <feature>Code snippets</feature>
+                <feature>Props documentation</feature>
+                <feature>Theme customization</feature>
+            </features>
+        </component>
+
+        <component name="ModelBuilder">
+            <description>Visual model definition interface</description>
+            <features>
+                <feature>Drag-and-drop fields</feature>
+                <feature>Validation rules</feature>
+                <feature>Relationships</feature>
+                <feature>Generate DSL</feature>
+            </features>
+        </component>
+
+        <!-- Layout Components -->
+        <component name="DemoLayout">
+            <description>Main layout for the demo application</description>
+            <features>
+                <feature>Responsive design</feature>
+                <feature>Navigation sidebar</feature>
+                <feature>Theme switcher</feature>
+            </features>
+        </component>
+
+        <!-- Example Pages -->
+        <page name="Home">
+            <description>Welcome page with quick start guide</description>
+            <components>
+                <component>DSLPlayground</component>
+                <component>ComponentGallery</component>
+            </components>
+        </page>
+
+        <page name="Components">
+            <description>Detailed component documentation</description>
+            <components>
+                <component>ComponentGallery</component>
+                <component>ModelBuilder</component>
+            </components>
+        </page>
+
+        <page name="Playground">
+            <description>Full-featured DSL playground</description>
+            <components>
+                <component>DSLPlayground</component>
+                <component>ModelBuilder</component>
+            </components>
+        </page>
+    </components>
+
+    <data-models>
+        <model name="Component">
+            <fields>
+                <field name="name" type="string" required="true"/>
+                <field name="description" type="string"/>
+                <field name="features" type="string[]"/>
+                <field name="props" type="object"/>
+                <field name="examples" type="object[]"/>
+            </fields>
+        </model>
+
+        <model name="DSLExample">
+            <fields>
+                <field name="title" type="string" required="true"/>
+                <field name="description" type="string"/>
+                <field name="code" type="string" required="true"/>
+                <field name="preview" type="object"/>
+                <field name="tags" type="string[]"/>
+            </fields>
+        </model>
+    </data-models>
+
+    <endpoints>
+        <endpoint path="/api/components" method="GET">
+            <description>Get all available components</description>
+            <response>Component[]</response>
+        </endpoint>
+        
+        <endpoint path="/api/examples" method="GET">
+            <description>Get all DSL examples</description>
+            <response>DSLExample[]</response>
+        </endpoint>
+        
+        <endpoint path="/api/validate" method="POST">
+            <description>Validate DSL code</description>
+            <request>string</request>
+            <response>object</response>
+        </endpoint>
+    </endpoints>
+</architecture> 
