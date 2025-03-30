@@ -5,111 +5,142 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo -e "${BLUE}Creating TokenDSL project structure...${NC}"
+# Function to create directory and log
+create_dir() {
+    mkdir -p "$1"
+    echo -e "${BLUE}Created directory:${NC} $1"
+}
 
-# Create root directories
-mkdir -p src/{layers/{presentation,application,domain,infrastructure}/__tests__,core/{parser,validator,generator,runtime,security}/__tests__,modules/{users,posts,comments}/{domain,application/{commands,queries,read-models,write-models,__tests__/{commands,queries}},infrastructure/__tests__,events/__tests__,dependencies,handlers,storage,ui,__tests__},events/__tests__,cqrs/__tests__,shared/{types,utils,constants},docs,monitoring}
+# Function to create file and log
+create_file() {
+    touch "$1"
+    echo -e "${GREEN}Created file:${NC} $1"
+}
+
+# Create XML parser utility structure
+create_dir "utils/xml-parser"
+create_file "utils/xml-parser/package.json"
+create_file "utils/xml-parser/tsconfig.json"
+create_file "utils/xml-parser/src/index.ts"
+create_file "utils/xml-parser/src/parser.ts"
+create_file "utils/xml-parser/src/generator.ts"
+create_file "utils/xml-parser/src/types.ts"
+create_file "utils/xml-parser/src/utils.ts"
+create_file "utils/xml-parser/README.md"
+
+# Create src directory structure
+create_dir "src/types/core"
+create_dir "src/types/models"
+create_dir "src/types/dsl"
+create_dir "src/types/domain"
+create_dir "src/types/application"
+create_dir "src/types/infrastructure"
+create_dir "src/types/ui"
+create_dir "src/types/shared"
+
+# Create core type files
+create_file "src/types/core/index.ts"
+create_file "src/types/core/api.ts"
+create_file "src/types/core/config.ts"
+create_file "src/types/core/errors.ts"
+
+# Create model type files
+create_file "src/types/models/index.ts"
+create_file "src/types/models/user.ts"
+create_file "src/types/models/order.ts"
+create_file "src/types/models/product.ts"
+create_file "src/types/models/common.ts"
+create_file "src/types/models/filters.ts"
+create_file "src/types/models/sorts.ts"
+create_file "src/types/models/pagination.ts"
+create_file "src/types/models/validation.ts"
+create_file "src/types/models/responses.ts"
+
+# Create DSL type files
+create_dir "src/dsl/users-service-v1.0/models"
+create_dir "src/dsl/users-service-v1.0/endpoints"
+create_dir "src/dsl/users-service-v1.0/i18n"
+create_dir "src/dsl/users-service-v1.0/test-data"
+
+create_dir "src/dsl/orders-service-v2.0/models"
+create_dir "src/dsl/orders-service-v2.0/endpoints"
+create_dir "src/dsl/orders-service-v2.0/i18n"
+create_dir "src/dsl/orders-service-v2.0/test-data"
+
+create_dir "src/dsl/common/models"
+create_dir "src/dsl/common/middlewares"
+create_dir "src/dsl/common/validators"
+
+# Create DSL files
+create_file "src/dsl/users-service-v1.0/index.dsl.ts"
+create_file "src/dsl/users-service-v1.0/service.config.dsl.ts"
+create_file "src/dsl/users-service-v1.0/models/user.model.dsl.ts"
+create_file "src/dsl/users-service-v1.0/models/role.model.dsl.ts"
+create_file "src/dsl/users-service-v1.0/endpoints/users.endpoints.dsl.ts"
+create_file "src/dsl/users-service-v1.0/endpoints/auth.endpoints.dsl.ts"
+create_file "src/dsl/users-service-v1.0/i18n/en.mo"
+create_file "src/dsl/users-service-v1.0/i18n/pl.mo"
+create_file "src/dsl/users-service-v1.0/i18n/i18n.dsl.ts"
+create_file "src/dsl/users-service-v1.0/test-data/users.data.json"
+create_file "src/dsl/users-service-v1.0/test-data/roles.data.json"
+
+# Create layers structure
+create_dir "src/layers/presentation/__tests__"
+create_dir "src/layers/application/__tests__"
+create_dir "src/layers/domain/__tests__"
+create_dir "src/layers/infrastructure/__tests__"
+
+# Create core DSL system structure
+create_dir "src/core/parser/__tests__"
+create_dir "src/core/validator/__tests__"
+create_dir "src/core/generator/__tests__"
+create_dir "src/core/runtime"
+create_dir "src/core/security"
+
+# Create modules structure
+for module in users posts comments; do
+    create_dir "src/modules/$module/domain/__tests__"
+    create_dir "src/modules/$module/application/commands"
+    create_dir "src/modules/$module/application/queries"
+    create_dir "src/modules/$module/application/read-models"
+    create_dir "src/modules/$module/application/write-models"
+    create_dir "src/modules/$module/application/__tests__/commands"
+    create_dir "src/modules/$module/application/__tests__/queries"
+    create_dir "src/modules/$module/infrastructure/__tests__"
+    create_dir "src/modules/$module/events/__tests__"
+    create_dir "src/modules/$module/dependencies"
+    create_dir "src/modules/$module/handlers"
+    create_dir "src/modules/$module/storage"
+    create_dir "src/modules/$module/ui"
+    create_dir "src/modules/$module/__tests__"
+done
+
+# Create shared components structure
+create_dir "src/shared/types"
+create_dir "src/shared/utils"
+create_dir "src/shared/constants"
+
+# Create documentation structure
+create_dir "src/docs/guides"
+
+# Create monitoring structure
+create_dir "src/monitoring/handlers"
+
+# Create test configuration structure
+create_dir "test/fixtures"
 
 # Create root configuration files
-touch package.json tsconfig.json jest.config.js README.md docker-compose.yml .env.example
+touch "package.json"
+touch "tsconfig.json"
+touch "jest.config.js"
+touch "README.md"
+touch "docker-compose.yml"
+touch ".env.example"
 
-# Create .cursor directory structure
-mkdir -p .cursor/{team,structure}
-touch .cursor/{FEAT.md,VISION.01.INTRO.md,VISION.02.USERS.md,VISION.03.DSL.SERVER.md}
-touch .cursor/structure/index.xml
-
-# Create test configuration
-mkdir -p test
-touch test/{jest.config.js,setup.ts,teardown.ts,helpers.ts,mocks.ts}
-
-# Create layers files
-for layer in presentation application domain infrastructure; do
-    touch src/layers/$layer/{index.ts,controllers.ts,middleware.ts,validation.ts}
-    touch src/layers/$layer/__tests__/{controllers.test.ts,middleware.test.ts,validation.test.ts,fixtures.ts}
-done
-
-# Create core files
-touch src/core/{index.ts,types.ts,errors.ts,config.ts}
-for component in parser validator generator runtime security; do
-    touch src/core/$component/{index.ts,lexer.ts,ast.ts,visitor.ts,errors.ts}
-    touch src/core/$component/__tests__/{lexer.test.ts,ast.test.ts,visitor.test.ts,fixtures.ts}
-done
-
-# Create module files
-for module in users posts comments; do
-    # Domain
-    mkdir -p src/modules/$module/domain/__tests__
-    touch src/modules/$module/domain/{${module}.entity.ts,${module}.repository.ts,${module}.service.ts}
-    touch src/modules/$module/domain/__tests__/{${module}.entity.test.ts,${module}.repository.test.ts,${module}.service.test.ts,fixtures.ts}
-    
-    # Application
-    mkdir -p src/modules/$module/application/{commands,queries,read-models,write-models,__tests__/{commands,queries}}
-    touch src/modules/$module/application/commands/{create-${module}.command.ts,update-${module}.command.ts,delete-${module}.command.ts}
-    touch src/modules/$module/application/queries/{get-${module}.query.ts,list-${module}s.query.ts}
-    touch src/modules/$module/application/read-models/{${module}.read-model.ts,${module}-list.read-model.ts}
-    touch src/modules/$module/application/write-models/{${module}.write-model.ts}
-    touch src/modules/$module/application/__tests__/commands/{create-${module}.test.ts,update-${module}.test.ts,delete-${module}.test.ts}
-    touch src/modules/$module/application/__tests__/queries/{get-${module}.test.ts,list-${module}s.test.ts}
-    touch src/modules/$module/application/__tests__/fixtures.ts
-    
-    # Infrastructure
-    mkdir -p src/modules/$module/infrastructure/__tests__
-    touch src/modules/$module/infrastructure/{${module}.repository.impl.ts,${module}.mapper.ts}
-    touch src/modules/$module/infrastructure/__tests__/{repository.test.ts,mapper.test.ts,fixtures.ts}
-    
-    # Events
-    mkdir -p src/modules/$module/events/__tests__
-    touch src/modules/$module/events/{${module}-created.event.ts,${module}-updated.event.ts,${module}-deleted.event.ts,event-handlers.ts}
-    touch src/modules/$module/events/__tests__/{event-handlers.test.ts,fixtures.ts}
-    
-    # Dependencies
-    touch src/modules/$module/dependencies/{index.ts,interfaces.ts}
-    
-    # Main module files
-    touch src/modules/$module/{index.dsl.ts,api.ts,schemas.ts}
-    
-    # Handlers
-    touch src/modules/$module/handlers/{create.ts,get.ts,update.ts,delete.ts}
-    
-    # Storage
-    touch src/modules/$module/storage/{memory.ts,database.ts,seed.ts}
-    
-    # UI
-    touch src/modules/$module/ui/{forms.ts,pages.ts,components.ts}
-    
-    # Module tests
-    mkdir -p src/modules/$module/__tests__
-    touch src/modules/$module/__tests__/{integration.test.ts,e2e.test.ts,fixtures.ts}
-done
-
-# Create events files
-mkdir -p src/events/__tests__
-touch src/events/{index.ts,event-store.ts,event-bus.ts,event-handler.ts,event-serializer.ts}
-touch src/events/__tests__/{event-store.test.ts,event-bus.test.ts,event-handler.test.ts,event-serializer.test.ts,fixtures.ts}
-
-# Create CQRS files
-mkdir -p src/cqrs/__tests__
-touch src/cqrs/{index.ts,command-bus.ts,query-bus.ts,command-handler.ts,query-handler.ts}
-touch src/cqrs/__tests__/{command-bus.test.ts,query-bus.test.ts,command-handler.test.ts,query-handler.test.ts,fixtures.ts}
-
-# Create shared files
-touch src/shared/types/{index.ts,api.ts,ui.ts}
-touch src/shared/utils/{index.ts,validation.ts,formatting.ts}
-touch src/shared/constants/{index.ts,api.ts,ui.ts}
-
-# Create documentation files
-touch src/docs/{api.md,dsl.md,ui.md,examples.md,security.md,testing.md}
-
-# Create monitoring files
-touch src/monitoring/{index.ts,metrics.ts,logging.ts,errors.ts}
+# Create development tools structure
+create_dir ".cursor/structure"
 
 # Make the script executable
 chmod +x setup.sh
 
-echo -e "${GREEN}Project structure created successfully!${NC}"
-echo -e "${BLUE}Next steps:${NC}"
-echo "1. Initialize git repository: git init"
-echo "2. Install dependencies: npm install"
-echo "3. Configure TypeScript: npx tsc --init"
-echo "4. Configure ESLint: npx eslint --init"
-echo "5. Configure Prettier: npx prettier --init" 
+echo -e "${GREEN}Setup completed successfully!${NC}" 
