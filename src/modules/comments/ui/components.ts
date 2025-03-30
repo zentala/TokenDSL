@@ -6,15 +6,11 @@ export interface CommentForm extends UiForm {
 }
 
 export interface CommentFormField extends UiFormField {
-  name: keyof CommentReadModel;
-  type: 'text' | 'textarea' | 'select';
-  validation?: {
-    required?: boolean;
-    minLength?: number;
-    maxLength?: number;
-    pattern?: string;
-    custom?: (value: any) => boolean;
-  };
+  name: string;
+  type: string;
+  label: string;
+  required?: boolean;
+  value?: string;
 }
 
 export interface CommentListComponent extends UiComponent {

@@ -5,9 +5,9 @@ export type UUID = string;
 
 // Base Entity
 export interface BaseEntity {
-  id: ID;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+  id: string;
+  createdAt: number;
+  updatedAt: number;
 }
 
 // User Types
@@ -20,9 +20,8 @@ export interface User extends BaseEntity {
 }
 
 export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-  GUEST = 'GUEST'
+  USER = 'user',
+  ADMIN = 'admin'
 }
 
 // Post Types
@@ -81,34 +80,26 @@ export interface EventMetadata {
 
 // Command Types
 export interface Command {
-  id: ID;
   type: string;
-  timestamp: Timestamp;
-  data: unknown;
-  metadata: CommandMetadata;
+  payload: any;
 }
 
 export interface CommandMetadata {
-  userId?: ID;
-  sessionId?: string;
-  ip?: string;
-  userAgent?: string;
+  timestamp: Date;
+  userId?: string;
+  correlationId?: string;
 }
 
 // Query Types
 export interface Query {
-  id: ID;
   type: string;
-  timestamp: Timestamp;
-  data: unknown;
-  metadata: QueryMetadata;
+  payload: any;
 }
 
 export interface QueryMetadata {
-  userId?: ID;
-  sessionId?: string;
-  ip?: string;
-  userAgent?: string;
+  timestamp: Date;
+  userId?: string;
+  correlationId?: string;
 }
 
 // Repository Types
@@ -157,16 +148,16 @@ export interface ValidationError {
 }
 
 // API Types
-export interface ApiResponse<T> {
+export interface ApiResponse<T = any> {
   success: boolean;
   data?: T;
-  error?: ApiError;
+  error?: string;
 }
 
 export interface ApiError {
   code: string;
   message: string;
-  details?: unknown;
+  details?: any;
 }
 
 // UI Types
@@ -301,4 +292,18 @@ export interface CorsConfig {
   methods: string[];
   allowedHeaders: string[];
   credentials: boolean;
-} 
+}
+
+// Common types for the application
+export interface User extends BaseEntity {
+  username: string;
+  email: string;
+  role: UserRole;
+}
+
+export interface EndpointDefinition {
+  input?: any;
+  handler: (data: any, req: any) => Promise<any>;
+}
+
+export type ApiDefinition = Record<string, EndpointDefinition>; 

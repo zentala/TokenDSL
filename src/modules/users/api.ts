@@ -1,6 +1,8 @@
 import { ApiResponse, ApiError } from '../../../shared/types/TYPES';
 import { UserReadModel, UserListReadModel } from './application/read-models/user.read-model';
 import { CreateUserCommandData } from './application/commands/create-user.command';
+import { ApiDefinition } from '../../../shared/types/TYPES';
+import { createUser, getUserById } from './handlers/users';
 
 export interface UserApiEndpoints {
   // User Management
@@ -21,3 +23,12 @@ export interface UserApiEndpoints {
 export interface UserApiError extends ApiError {
   code: 'USER_NOT_FOUND' | 'USER_ALREADY_EXISTS' | 'INVALID_CREDENTIALS' | 'USER_LOCKED' | 'INVALID_TOKEN';
 }
+
+export const userApi: ApiDefinition = {
+  'GET /users/:id': {
+    handler: getUserById,
+  },
+  'POST /users': {
+    handler: createUser,
+  },
+};

@@ -6,15 +6,11 @@ export interface PostForm extends UiForm {
 }
 
 export interface PostFormField extends UiFormField {
-  name: keyof PostReadModel;
-  type: 'text' | 'textarea' | 'select' | 'checkbox';
-  validation?: {
-    required?: boolean;
-    minLength?: number;
-    maxLength?: number;
-    pattern?: string;
-    custom?: (value: any) => boolean;
-  };
+  name: string;
+  type: string;
+  label: string;
+  required?: boolean;
+  value?: string;
 }
 
 export interface PostListComponent extends UiComponent {

@@ -1,8 +1,8 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import { applyApi } from './engine';
-import { userApi } from './examples/users';
+import { applyApi } from './core/api';
+import { userApi } from './modules/users/api';
 import path from 'path';
 
 const app = express();
@@ -38,22 +38,7 @@ app.get('/', (req, res) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Apply our API definitions
-applyApi(app, userApi, {
-  onSuccess: (req, res, result) => {
-    if (req.method === 'POST') {
-      res.status(201).json(result);
-    } else {
-      res.json(result);
-    }
-  },
-  onError: (req, res, error) => {
-    if (error.message === 'User not found') {
-      res.status(404).json({ error: error.message });
-    } else {
-      res.status(400).json({ error: error.message });
-    }
-  },
-});
+applyApi(app, userApi);
 
 // Start server
 const PORT = process.env.PORT || 3000;
