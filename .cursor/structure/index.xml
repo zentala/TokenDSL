@@ -5,6 +5,490 @@
     
     <!-- Root Structure -->
     <directory name="src">
+        <!-- Type Definitions -->
+        <directory name="types">
+            <!-- Core Types -->
+            <directory name="core">
+                <file name="index.ts">Core type definitions</file>
+                <file name="api.ts">
+                    <interface name="ApiDefinition">Record of endpoint definitions</interface>
+                    <interface name="EndpointDefinition">Endpoint configuration and handler</interface>
+                    <interface name="Handler">Request handler function type</interface>
+                    <interface name="Middleware">Express middleware type</interface>
+                </file>
+                <file name="config.ts">
+                    <interface name="ServiceConfig">Service configuration options</interface>
+                    <interface name="ServerConfig">Server configuration options</interface>
+                    <interface name="DatabaseConfig">Database configuration options</interface>
+                </file>
+                <file name="errors.ts">
+                    <interface name="ApiError">API error response type</interface>
+                    <interface name="ValidationError">Validation error type</interface>
+                    <interface name="BusinessError">Business logic error type</interface>
+                </file>
+            </directory>
+
+            <!-- Data Models -->
+            <directory name="models">
+                <file name="index.ts">Data model type definitions</file>
+                
+                <!-- User Models -->
+                <file name="user.ts">
+                    <interface name="User">
+                        id: string;
+                        email: string;
+                        password: string;
+                        firstName: string;
+                        lastName: string;
+                        role: UserRole;
+                        status: UserStatus;
+                        createdAt: Date;
+                        updatedAt: Date;
+                        lastLoginAt?: Date;
+                        metadata: Record<string, unknown>;
+                    </interface>
+                    <interface name="UserCreate">
+                        email: string;
+                        password: string;
+                        firstName: string;
+                        lastName: string;
+                        role?: UserRole;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="UserUpdate">
+                        email?: string;
+                        password?: string;
+                        firstName?: string;
+                        lastName?: string;
+                        role?: UserRole;
+                        status?: UserStatus;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="UserFilter">
+                        email?: string;
+                        role?: UserRole;
+                        status?: UserStatus;
+                        createdAt?: DateRange;
+                        search?: string;
+                    </interface>
+                    <interface name="UserSort">
+                        field: 'email' | 'firstName' | 'lastName' | 'createdAt' | 'lastLoginAt';
+                        direction: SortDirection;
+                    </interface>
+                    <type name="UserRole">'admin' | 'user' | 'guest'</type>
+                    <type name="UserStatus">'active' | 'inactive' | 'blocked' | 'pending'</type>
+                </file>
+
+                <!-- Order Models -->
+                <file name="order.ts">
+                    <interface name="Order">
+                        id: string;
+                        userId: string;
+                        items: OrderItem[];
+                        totalAmount: Price;
+                        status: OrderStatus;
+                        paymentStatus: PaymentStatus;
+                        shippingAddress: Address;
+                        billingAddress: Address;
+                        createdAt: Date;
+                        updatedAt: Date;
+                        metadata: Record<string, unknown>;
+                    </interface>
+                    <interface name="OrderCreate">
+                        userId: string;
+                        items: OrderItem[];
+                        shippingAddress: Address;
+                        billingAddress: Address;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="OrderUpdate">
+                        status?: OrderStatus;
+                        paymentStatus?: PaymentStatus;
+                        shippingAddress?: Address;
+                        billingAddress?: Address;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="OrderItem">
+                        productId: string;
+                        quantity: number;
+                        price: Price;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="OrderFilter">
+                        userId?: string;
+                        status?: OrderStatus;
+                        paymentStatus?: PaymentStatus;
+                        totalAmount?: PriceRange;
+                        createdAt?: DateRange;
+                    </interface>
+                    <interface name="OrderSort">
+                        field: 'createdAt' | 'totalAmount' | 'status';
+                        direction: SortDirection;
+                    </interface>
+                    <type name="OrderStatus">'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'</type>
+                    <type name="PaymentStatus">'pending' | 'paid' | 'failed' | 'refunded'</type>
+                </file>
+
+                <!-- Product Models -->
+                <file name="product.ts">
+                    <interface name="Product">
+                        id: string;
+                        name: string;
+                        description: string;
+                        price: Price;
+                        category: ProductCategory;
+                        status: ProductStatus;
+                        images: Image[];
+                        stock: number;
+                        createdAt: Date;
+                        updatedAt: Date;
+                        metadata: Record<string, unknown>;
+                    </interface>
+                    <interface name="ProductCreate">
+                        name: string;
+                        description: string;
+                        price: Price;
+                        category: ProductCategory;
+                        images?: Image[];
+                        stock: number;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="ProductUpdate">
+                        name?: string;
+                        description?: string;
+                        price?: Price;
+                        category?: ProductCategory;
+                        status?: ProductStatus;
+                        images?: Image[];
+                        stock?: number;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="ProductCategory">
+                        id: string;
+                        name: string;
+                        description?: string;
+                        parentId?: string;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="ProductFilter">
+                        category?: string;
+                        status?: ProductStatus;
+                        price?: PriceRange;
+                        stock?: { min?: number; max?: number };
+                        search?: string;
+                    </interface>
+                    <interface name="ProductSort">
+                        field: 'name' | 'price' | 'stock' | 'createdAt';
+                        direction: SortDirection;
+                    </interface>
+                    <type name="ProductStatus">'active' | 'inactive' | 'out_of_stock' | 'discontinued'</type>
+                </file>
+
+                <!-- Common Models -->
+                <file name="common.ts">
+                    <interface name="Address">
+                        street: string;
+                        city: string;
+                        state: string;
+                        country: string;
+                        postalCode: string;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="Contact">
+                        email: string;
+                        phone?: string;
+                        mobile?: string;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="Price">
+                        amount: number;
+                        currency: string;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="Image">
+                        url: string;
+                        alt?: string;
+                        width?: number;
+                        height?: number;
+                        metadata?: Record<string, unknown>;
+                    </interface>
+                    <interface name="Metadata">
+                        [key: string]: unknown;
+                    </interface>
+                </file>
+
+                <!-- Filter Models -->
+                <file name="filters.ts">
+                    <interface name="DateRange">
+                        from: Date;
+                        to: Date;
+                    </interface>
+                    <interface name="PriceRange">
+                        min: Price;
+                        max: Price;
+                    </interface>
+                    <interface name="SearchFilter">
+                        query: string;
+                        fields: string[];
+                    </interface>
+                    <interface name="StatusFilter">
+                        status: string[];
+                    </interface>
+                    <interface name="CategoryFilter">
+                        categoryId: string;
+                        includeSubcategories?: boolean;
+                    </interface>
+                </file>
+
+                <!-- Sort Models -->
+                <file name="sorts.ts">
+                    <type name="SortDirection">'asc' | 'desc'</type>
+                    <interface name="SortField">
+                        field: string;
+                        direction: SortDirection;
+                    </interface>
+                    <interface name="MultiSort">
+                        fields: SortField[];
+                    </interface>
+                </file>
+
+                <!-- Pagination Models -->
+                <file name="pagination.ts">
+                    <interface name="PaginationParams">
+                        page: number;
+                        limit: number;
+                    </interface>
+                    <interface name="PaginationResult<T>">
+                        items: T[];
+                        total: number;
+                        page: number;
+                        limit: number;
+                        totalPages: number;
+                    </interface>
+                    <interface name="PageInfo">
+                        currentPage: number;
+                        totalPages: number;
+                        hasNextPage: boolean;
+                        hasPreviousPage: boolean;
+                    </interface>
+                </file>
+
+                <!-- Validation Models -->
+                <file name="validation.ts">
+                    <interface name="ValidationRule">
+                        type: ValidationType;
+                        message: string;
+                        params?: Record<string, unknown>;
+                    </interface>
+                    <interface name="ValidationError">
+                        field: string;
+                        message: string;
+                        code: string;
+                        params?: Record<string, unknown>;
+                    </interface>
+                    <interface name="ValidationResult">
+                        isValid: boolean;
+                        errors: ValidationError[];
+                    </interface>
+                    <type name="ValidationType">'required' | 'email' | 'min' | 'max' | 'pattern' | 'custom'</type>
+                </file>
+
+                <!-- Response Models -->
+                <file name="responses.ts">
+                    <interface name="ApiResponse<T>">
+                        success: boolean;
+                        data?: T;
+                        error?: ApiError;
+                    </interface>
+                    <interface name="SuccessResponse<T>">
+                        success: true;
+                        data: T;
+                    </interface>
+                    <interface name="ErrorResponse">
+                        success: false;
+                        error: ApiError;
+                    </interface>
+                    <interface name="ListResponse<T>">
+                        success: true;
+                        data: T[];
+                        pagination: PaginationResult<T>;
+                    </interface>
+                </file>
+            </directory>
+
+            <!-- DSL Types -->
+            <directory name="dsl">
+                <file name="index.ts">DSL type definitions</file>
+                <file name="model.ts">
+                    <interface name="ModelDefinition">DSL model definition</interface>
+                    <interface name="FieldDefinition">Model field definition</interface>
+                    <interface name="RelationDefinition">Model relation definition</interface>
+                </file>
+                <file name="endpoint.ts">
+                    <interface name="EndpointDefinition">DSL endpoint definition</interface>
+                    <interface name="InputDefinition">Endpoint input definition</interface>
+                    <interface name="OutputDefinition">Endpoint output definition</interface>
+                </file>
+                <file name="service.ts">
+                    <interface name="ServiceDefinition">DSL service definition</interface>
+                    <interface name="ServiceConfig">Service configuration</interface>
+                </file>
+            </directory>
+
+            <!-- Domain Types -->
+            <directory name="domain">
+                <file name="index.ts">Domain type definitions</file>
+                <file name="entity.ts">
+                    <interface name="Entity">Base entity interface</interface>
+                    <interface name="AggregateRoot">Aggregate root interface</interface>
+                    <interface name="ValueObject">Value object interface</interface>
+                </file>
+                <file name="repository.ts">
+                    <interface name="Repository">Base repository interface</interface>
+                    <interface name="QueryOptions">Repository query options</interface>
+                </file>
+                <file name="event.ts">
+                    <interface name="DomainEvent">Domain event interface</interface>
+                    <interface name="EventHandler">Event handler interface</interface>
+                </file>
+            </directory>
+
+            <!-- Application Types -->
+            <directory name="application">
+                <file name="index.ts">Application type definitions</file>
+                <file name="command.ts">
+                    <interface name="Command">Command interface</interface>
+                    <interface name="CommandHandler">Command handler interface</interface>
+                </file>
+                <file name="query.ts">
+                    <interface name="Query">Query interface</interface>
+                    <interface name="QueryHandler">Query handler interface</interface>
+                </file>
+                <file name="dto.ts">
+                    <interface name="DTO">Data transfer object interface</interface>
+                    <interface name="CreateDTO">Create DTO interface</interface>
+                    <interface name="UpdateDTO">Update DTO interface</interface>
+                </file>
+            </directory>
+
+            <!-- Infrastructure Types -->
+            <directory name="infrastructure">
+                <file name="index.ts">Infrastructure type definitions</file>
+                <file name="database.ts">
+                    <interface name="Database">Database interface</interface>
+                    <interface name="Transaction">Transaction interface</interface>
+                </file>
+                <file name="cache.ts">
+                    <interface name="Cache">Cache interface</interface>
+                    <interface name="CacheOptions">Cache options</interface>
+                </file>
+                <file name="messaging.ts">
+                    <interface name="MessageBus">Message bus interface</interface>
+                    <interface name="Message">Message interface</interface>
+                </file>
+            </directory>
+
+            <!-- UI Types -->
+            <directory name="ui">
+                <file name="index.ts">UI type definitions</file>
+                <file name="component.ts">
+                    <interface name="Component">UI component interface</interface>
+                    <interface name="ComponentProps">Component props interface</interface>
+                </file>
+                <file name="form.ts">
+                    <interface name="FormField">Form field interface</interface>
+                    <interface name="FormValidation">Form validation interface</interface>
+                </file>
+                <file name="layout.ts">
+                    <interface name="Layout">Layout interface</interface>
+                    <interface name="LayoutProps">Layout props interface</interface>
+                </file>
+            </directory>
+
+            <!-- Shared Types -->
+            <directory name="shared">
+                <file name="index.ts">Shared type definitions</file>
+                <file name="common.ts">
+                    <interface name="Pagination">Pagination interface</interface>
+                    <interface name="Sorting">Sorting interface</interface>
+                    <interface name="Filtering">Filtering interface</interface>
+                </file>
+                <file name="validation.ts">
+                    <interface name="ValidationRule">Validation rule interface</interface>
+                    <interface name="ValidationResult">Validation result interface</interface>
+                </file>
+                <file name="i18n.ts">
+                    <interface name="Translation">Translation interface</interface>
+                    <interface name="Locale">Locale interface</interface>
+                </file>
+            </directory>
+        </directory>
+
+        <!-- DSL Definitions -->
+        <directory name="dsl">
+            <!-- Users Service -->
+            <directory name="users-service-v1.0">
+                <file name="index.dsl.ts">Service definition</file>
+                <file name="service.config.dsl.ts">Service configuration</file>
+                <directory name="models">
+                    <file name="user.model.dsl.ts">User model definition</file>
+                    <file name="role.model.dsl.ts">Role model definition</file>
+                </directory>
+                <directory name="endpoints">
+                    <file name="users.endpoints.dsl.ts">User endpoints</file>
+                    <file name="auth.endpoints.dsl.ts">Auth endpoints</file>
+                </directory>
+                <directory name="i18n">
+                    <file name="en.mo">English translations</file>
+                    <file name="pl.mo">Polish translations</file>
+                    <file name="i18n.dsl.ts">i18n configuration</file>
+                </directory>
+                <directory name="test-data">
+                    <file name="users.data.json">User test data</file>
+                    <file name="roles.data.json">Role test data</file>
+                </directory>
+            </directory>
+            
+            <!-- Orders Service -->
+            <directory name="orders-service-v2.0">
+                <file name="index.dsl.ts">Service definition</file>
+                <file name="service.config.dsl.ts">Service configuration</file>
+                <directory name="models">
+                    <file name="order.model.dsl.ts">Order model definition</file>
+                    <file name="product.model.dsl.ts">Product model definition</file>
+                </directory>
+                <directory name="endpoints">
+                    <file name="orders.endpoints.dsl.ts">Order endpoints</file>
+                    <file name="products.endpoints.dsl.ts">Product endpoints</file>
+                </directory>
+                <directory name="i18n">
+                    <file name="en.mo">English translations</file>
+                    <file name="pl.mo">Polish translations</file>
+                    <file name="i18n.dsl.ts">i18n configuration</file>
+                </directory>
+                <directory name="test-data">
+                    <file name="orders.data.json">Order test data</file>
+                    <file name="products.data.json">Product test data</file>
+                </directory>
+            </directory>
+            
+            <!-- Common Resources -->
+            <directory name="common">
+                <directory name="models">
+                    <file name="base.model.dsl.ts">Base model definitions</file>
+                    <file name="shared.model.dsl.ts">Shared model definitions</file>
+                </directory>
+                <directory name="middlewares">
+                    <file name="auth.middleware.dsl.ts">Auth middleware</file>
+                    <file name="validation.middleware.dsl.ts">Validation middleware</file>
+                </directory>
+                <directory name="validators">
+                    <file name="common.validator.dsl.ts">Common validators</file>
+                    <file name="custom.validator.dsl.ts">Custom validators</file>
+                </directory>
+            </directory>
+        </directory>
+
         <!-- Layers -->
         <directory name="layers">
             <directory name="presentation">
@@ -419,16 +903,19 @@
                 <file name="index.ts">Shared type definitions</file>
                 <file name="api.ts">API types</file>
                 <file name="ui.ts">UI types</file>
+                <file name="validation.ts">Validation types</file>
             </directory>
             <directory name="utils">
                 <file name="index.ts">Shared utilities</file>
                 <file name="validation.ts">Validation utilities</file>
                 <file name="formatting.ts">Formatting utilities</file>
+                <file name="date.ts">Date utilities</file>
             </directory>
             <directory name="constants">
                 <file name="index.ts">Shared constants</file>
                 <file name="api.ts">API constants</file>
                 <file name="ui.ts">UI constants</file>
+                <file name="errors.ts">Error constants</file>
             </directory>
         </directory>
         
@@ -440,6 +927,11 @@
             <file name="examples.md">Usage examples</file>
             <file name="security.md">Security documentation</file>
             <file name="testing.md">Testing documentation</file>
+            <directory name="guides">
+                <file name="getting-started.md">Getting started guide</file>
+                <file name="best-practices.md">Best practices</file>
+                <file name="troubleshooting.md">Troubleshooting guide</file>
+            </directory>
         </directory>
         
         <!-- Monitoring -->
@@ -448,6 +940,11 @@
             <file name="metrics.ts">Metrics collection</file>
             <file name="logging.ts">Logging system</file>
             <file name="errors.ts">Error tracking</file>
+            <directory name="handlers">
+                <file name="prometheus.ts">Prometheus metrics handler</file>
+                <file name="elasticsearch.ts">Elasticsearch logging handler</file>
+                <file name="sentry.ts">Sentry error tracking handler</file>
+            </directory>
         </directory>
     </directory>
     
@@ -477,5 +974,10 @@
         <file name="teardown.ts">Test teardown</file>
         <file name="helpers.ts">Test helpers</file>
         <file name="mocks.ts">Global mocks</file>
+        <directory name="fixtures">
+            <file name="users.json">User test fixtures</file>
+            <file name="orders.json">Order test fixtures</file>
+            <file name="products.json">Product test fixtures</file>
+        </directory>
     </directory>
 </project> 
