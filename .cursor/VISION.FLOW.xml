@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <!-- Background -->
+  <rect width="900" height="700" fill="#f5f7fa" />
+  
+  <!-- Title -->
+  <text x="450" y="50" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#2d3748">TokenDSL: Token-Efficient Backend DSL</text>
+  <text x="450" y="80" font-family="Arial" font-size="18" text-anchor="middle" fill="#4a5568">Architektura i przepływ danych</text>
+  
+  <!-- Boxes -->
+  <!-- DSL Definition Layer -->
+  <rect x="150" y="120" width="600" height="120" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="2" />
+  <text x="450" y="145" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#2b6cb0">Definicje DSL</text>
+  
+  <!-- Service boxes -->
+  <rect x="180" y="160" width="160" height="60" rx="5" fill="#bee3f8" stroke="#3182ce" stroke-width="1" />
+  <text x="260" y="185" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c5282">users-service-v1.0</text>
+  <text x="260" y="205" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c5282">index.dsl.ts</text>
+  
+  <rect x="370" y="160" width="160" height="60" rx="5" fill="#bee3f8" stroke="#3182ce" stroke-width="1" />
+  <text x="450" y="185" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c5282">orders-service-v2.0</text>
+  <text x="450" y="205" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c5282">index.dsl.ts</text>
+  
+  <rect x="560" y="160" width="160" height="60" rx="5" fill="#bee3f8" stroke="#3182ce" stroke-width="1" />
+  <text x="640" y="185" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c5282">payments-service-v1.5</text>
+  <text x="640" y="205" font-family="Arial" font-size="12" text-anchor="middle" fill="#2c5282">index.dsl.ts</text>
+  
+  <!-- Generator/Validation Layer -->
+  <rect x="150" y="260" width="600" height="120" rx="10" fill="#e6fffa" stroke="#319795" stroke-width="2" />
+  <text x="450" y="285" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#285e61">TokenDSL Framework</text>
+  
+  <!-- Components -->
+  <rect x="170" y="300" width="130" height="60" rx="5" fill="#b2f5ea" stroke="#319795" stroke-width="1" />
+  <text x="235" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#234e52">DSL Loader</text>
+  
+  <rect x="310" y="300" width="130" height="60" rx="5" fill="#b2f5ea" stroke="#319795" stroke-width="1" />
+  <text x="375" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#234e52">DSL Validator</text>
+  
+  <rect x="450" y="300" width="130" height="60" rx="5" fill="#b2f5ea" stroke="#319795" stroke-width="1" />
+  <text x="515" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#234e52">Code Generator</text>
+  
+  <rect x="590" y="300" width="130" height="60" rx="5" fill="#b2f5ea" stroke="#319795" stroke-width="1" />
+  <text x="655" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#234e52">Services Manager</text>
+  
+  <!-- API Servers Layer -->
+  <rect x="150" y="400" width="600" height="120" rx="10" fill="#edf2ff" stroke="#4c51bf" stroke-width="2" />
+  <text x="450" y="425" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#3c366b">Generowane Serwisy API</text>
+  
+  <!-- Server components -->
+  <rect x="180" y="440" width="160" height="60" rx="5" fill="#c3dafe" stroke="#4c51bf" stroke-width="1" />
+  <text x="260" y="465" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#3c366b">Users API</text>
+  <text x="260" y="485" font-family="Arial" font-size="12" text-anchor="middle" fill="#3c366b">Port: 3001</text>
+  
+  <rect x="370" y="440" width="160" height="60" rx="5" fill="#c3dafe" stroke="#4c51bf" stroke-width="1" />
+  <text x="450" y="465" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#3c366b">Orders API</text>
+  <text x="450" y="485" font-family="Arial" font-size="12" text-anchor="middle" fill="#3c366b">Port: 3002</text>
+  
+  <rect x="560" y="440" width="160" height="60" rx="5" fill="#c3dafe" stroke="#4c51bf" stroke-width="1" />
+  <text x="640" y="465" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#3c366b">Payments API</text>
+  <text x="640" y="485" font-family="Arial" font-size="12" text-anchor="middle" fill="#3c366b">Port: 3003</text>
+  
+  <!-- Clients/Resources Layer -->
+  <rect x="150" y="540" width="600" height="120" rx="10" fill="#faf5ff" stroke="#805ad5" stroke-width="2" />
+  <text x="450" y="565" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#553c9a">Frontend & Dokumentacja</text>
+  
+  <!-- Client components -->
+  <rect x="180" y="590" width="130" height="60" rx="5" fill="#e9d8fd" stroke="#805ad5" stroke-width="1" />
+  <text x="245" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#44337a">React App</text>
+  
+  <rect x="320" y="590" width="130" height="60" rx="5" fill="#e9d8fd" stroke="#805ad5" stroke-width="1" />
+  <text x="385" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#44337a">API Docs</text>
+  
+  <rect x="460" y="590" width="130" height="60" rx="5" fill="#e9d8fd" stroke="#805ad5" stroke-width="1" />
+  <text x="525" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#44337a">Admin UI</text>
+  
+  <rect x="600" y="590" width="130" height="60" rx="5" fill="#e9d8fd" stroke="#805ad5" stroke-width="1" />
+  <text x="665" y="625" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#44337a">TypeScript Types</text>
+  
+  <!-- Arrows -->
+  <!-- DSL to Framework -->
+  <path d="M 450 240 L 450 260" stroke="#4a5568" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  
+  <!-- Framework to API -->
+  <path d="M 450 380 L 450 400" stroke="#4a5568" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  
+  <!-- API to Clients -->
+  <path d="M 450 520 L 450 540" stroke="#4a5568" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a5568" />
+    </marker>
+  </defs>
+  
+  <!-- Features -->
+  <g transform="translate(40, 240)">
+    <rect width="80" height="25" rx="12.5" fill="#ed8936" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Wersjonowanie</text>
+  </g>
+  
+  <g transform="translate(40, 275)">
+    <rect width="80" height="25" rx="12.5" fill="#38b2ac" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Walidacja</text>
+  </g>
+  
+  <g transform="translate(40, 310)">
+    <rect width="80" height="25" rx="12.5" fill="#4299e1" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">TypeScript</text>
+  </g>
+  
+  <g transform="translate(40, 345)">
+    <rect width="80" height="25" rx="12.5" fill="#667eea" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Dane testowe</text>
+  </g>
+  
+  <g transform="translate(40, 380)">
+    <rect width="80" height="25" rx="12.5" fill="#9f7aea" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">i18n</text>
+  </g>
+  
+  <g transform="translate(780, 240)">
+    <rect width="80" height="25" rx="12.5" fill="#68d391" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Token-Efficient</text>
+  </g>
+  
+  <g transform="translate(780, 275)">
+    <rect width="80" height="25" rx="12.5" fill="#4fd1c5" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Multi-Service</text>
+  </g>
+  
+  <g transform="translate(780, 310)">
+    <rect width="80" height="25" rx="12.5" fill="#63b3ed" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Auto-Doc</text>
+  </g>
+  
+  <g transform="translate(780, 345)">
+    <rect width="80" height="25" rx="12.5" fill="#7f9cf5" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">UI Schema</text>
+  </g>
+  
+  <g transform="translate(780, 380)">
+    <rect width="80" height="25" rx="12.5" fill="#b794f4" />
+    <text x="40" y="17" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">LLM Friendly</text>
+  </g>
